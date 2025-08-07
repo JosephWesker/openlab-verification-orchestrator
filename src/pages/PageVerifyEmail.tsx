@@ -9,6 +9,7 @@ const PageVerifyEmail = () => {
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+  const VITE_AUTH0_DOMAIN = import.meta.env.VITE_AUTH0_DOMAIN;
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -51,11 +52,11 @@ const PageVerifyEmail = () => {
   };
 
   const handleLogout = () => {
-    const domain = process.env.VITE_AUTH0_DOMAIN;
+    // const domain = VITE_AUTH0_DOMAIN;
     // const clientId = process.env.VITE_AUTH0_CLIENT_ID;
     const returnToUrl = encodeURIComponent(returnTo || window.location.origin);
 
-    window.location.href = `https://${domain}/v2/logout?client_id=${clientId}&returnTo=${returnToUrl}`;
+    window.location.href = `https://${VITE_AUTH0_DOMAIN}/v2/logout?client_id=${clientId}&returnTo=${returnToUrl}`;
   };
 
   return (
