@@ -5,6 +5,7 @@ const PageVerifyEmail = () => {
   const [returnTo, setReturnTo] = useState("");
   const [clientId, setClientId] = useState("");
   const [clientName, setClientName] = useState("");
+  const [state, setState] = useState("");
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -17,6 +18,7 @@ const PageVerifyEmail = () => {
     setReturnTo(params.get("returnTo") || "");
     setClientId(params.get("clientId") || "");
     setClientName(params.get("clientName") || "");
+    setState(params.get("state") || "");
   }, []);
 
   const handleResendVerification = async () => {
@@ -37,7 +39,8 @@ const PageVerifyEmail = () => {
           body: JSON.stringify({
             userEmail,
             clientId,
-            returnTo,
+            // returnTo,
+            state,
           }),
         }
       );
