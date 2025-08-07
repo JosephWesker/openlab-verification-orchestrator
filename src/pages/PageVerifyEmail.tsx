@@ -8,7 +8,7 @@ const PageVerifyEmail = () => {
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  // const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+  const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -25,7 +25,8 @@ const PageVerifyEmail = () => {
 
     try {
       // Llama a tu backend que tiene acceso al Management API
-      const response = await fetch(`${process.env.VITE_BACKEND_URL}/api/resend-verification`, {
+      // const response = await fetch(`${process.env.VITE_BACKEND_URL}/api/resend-verification`, {
+      const response = await fetch(`${VITE_BACKEND_URL}/api/resend-verification`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
