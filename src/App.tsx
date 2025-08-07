@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import './App.css'
 import PageVerifyEmail from './pages/PageVerifyEmail'
+import PageVerificationSuccess from './pages/PageVerificationSuccess'
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
           Cualquier otra ruta debe ser definida aquí arriba.
         */}
         <Route path="/" element={<PageVerifyEmail />} />
+        <Route path="verification-success" element={<PageVerificationSuccess />} />
 
         {/*
           Esta es la ruta comodín (catch-all).
