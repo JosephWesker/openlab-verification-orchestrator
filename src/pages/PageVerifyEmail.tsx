@@ -27,16 +27,20 @@ const PageVerifyEmail = () => {
     try {
       // Llama a tu backend que tiene acceso al Management API
       // const response = await fetch(`${process.env.VITE_BACKEND_URL}/api/resend-verification`, {
-      const response = await fetch(`${VITE_BACKEND_URL}/api/resend-verification`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ 
-          userEmail,
-          clientId
-        }),
-      });
+      const response = await fetch(
+        `${VITE_BACKEND_URL}/api/resend-verification`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            userEmail,
+            clientId,
+            returnTo: returnTo,
+          }),
+        }
+      );
 
       if (!response.ok) throw new Error("Error al reenviar el correo");
 
@@ -56,6 +60,7 @@ const PageVerifyEmail = () => {
     // const clientId = process.env.VITE_AUTH0_CLIENT_ID;
     const returnToUrl = encodeURIComponent(returnTo || window.location.origin);
 
+    console.log();
     window.location.href = `https://${VITE_AUTH0_DOMAIN}/v2/logout?client_id=${clientId}&returnTo=${returnToUrl}`;
   };
 
