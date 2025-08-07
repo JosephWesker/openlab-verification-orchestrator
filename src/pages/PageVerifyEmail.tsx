@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 const PageVerifyEmail = () => {
-  const [email, setEmail] = useState("");
+  const [userEmail, setEmail] = useState("");
   const [returnTo, setReturnTo] = useState("");
   const [clientId, setClientId] = useState("");
   const [clientName, setClientName] = useState("");
@@ -31,7 +31,7 @@ const PageVerifyEmail = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ 
-          email,
+          userEmail,
           clientId
         }),
       });
@@ -65,7 +65,7 @@ const PageVerifyEmail = () => {
       <p className="mb-2">
         Para acceder a <strong>{clientName}</strong>, debes verificar tu correo:
       </p>
-      <p className="mb-6 text-blue-500 font-medium">{email}</p>
+      <p className="mb-6 text-blue-500 font-medium">{userEmail}</p>
 
       {successMessage && (
         <p className="text-green-600 mb-2">{successMessage}</p>
