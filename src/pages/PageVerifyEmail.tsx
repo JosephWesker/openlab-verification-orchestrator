@@ -3,17 +3,19 @@ import { useEffect, useState } from "react";
 const PageVerifyEmail = () => {
   const [email, setEmail] = useState("");
   const [returnTo, setReturnTo] = useState("");
-  const [app, setApp] = useState("");
+  const [clientId, setClientId] = useState("");
+  const [clientName, setClientName] = useState("");
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+  // const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    setEmail(params.get("email") || "");
+    setEmail(params.get("userEmail") || "");
     setReturnTo(params.get("returnTo") || "");
-    setApp(params.get("app") || "");
+    setClientId(params.get("clientId") || "");
+    setClientName(params.get("clientName") || "");
   }, []);
 
   const handleResendVerification = async () => {
@@ -23,12 +25,15 @@ const PageVerifyEmail = () => {
 
     try {
       // Llama a tu backend que tiene acceso al Management API
-      const response = await fetch(`${BACKEND_URL}/api/resend-verification`, {
+      const response = await fetch(`${process.env.VITE_BACKEND_URL}/api/resend-verification`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ 
+          email,
+          clientId
+        }),
       });
 
       if (!response.ok) throw new Error("Error al reenviar el correo");
@@ -58,7 +63,7 @@ const PageVerifyEmail = () => {
         Verifica tu correo electrónico
       </h1>
       <p className="mb-2">
-        Para acceder a <strong>{app}</strong>, debes verificar tu correo:
+        Para acceder a <strong>{clientName}</strong>, debes verificar tu correo:
       </p>
       <p className="mb-6 text-blue-500 font-medium">{email}</p>
 
