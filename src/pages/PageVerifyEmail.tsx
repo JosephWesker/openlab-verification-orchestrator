@@ -37,7 +37,7 @@ const PageVerifyEmail = () => {
           body: JSON.stringify({
             userEmail,
             clientId,
-            returnTo: returnTo,
+            returnTo,
           }),
         }
       );
