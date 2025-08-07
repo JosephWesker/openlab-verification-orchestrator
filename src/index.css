@@ -1,4 +1,47 @@
-:root {
+@import "tailwindcss";
+
+@layer base {
+  html {
+    font-family: "Commissioner", sans-serif;
+  }
+
+  body {
+    @apply bg-default text-primary-t;
+  }
+}
+
+/* Definición de tema personalizado */
+@theme {
+  /* Colores del tema principal */
+  --color-primary: #3D7BFF;
+  --color-primary-hover: rgba(61, 123, 255, 0.15);
+
+  /* Colores secundarios */
+  --color-secondary: #588CFF;
+  --color-secondary-hover: rgba(88, 140, 255, 0.08);
+  --color-secondary-2: #6193FF;
+
+  /* Colores terciarios */
+  --color-tertiary: oklch(0.4036 0.0592 327.76);
+  --color-tertiary-hover: oklch(0.45 0.0592 327.76);
+
+  /* Colores de error */
+  --color-error: #BA1A1A;
+
+  /* Colores de texto */
+  --color-primary-t: #1A1B21;
+  --color-secondary-t: #45464F;
+
+  /* Colores de fondo */
+  --color-default: #FAF8FF;
+
+  /* Otros colores */
+  --color-other-1: oklch(0.4888 0.0595 328.6);
+
+  --breakpoint-3xl: 150rem;
+}
+
+/* :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -11,7 +54,7 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
+} */
 
 a {
   font-weight: 500;
@@ -54,7 +97,7 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: light) {
+/* @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
     background-color: #ffffff;
@@ -65,4 +108,4 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
-}
+} */

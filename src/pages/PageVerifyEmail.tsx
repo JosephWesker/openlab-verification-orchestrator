@@ -1,4 +1,7 @@
+import Button from "@mui/material/Button";
 import { useEffect, useState } from "react";
+import CircularProgress from "@mui/material/CircularProgress";
+import { Typography } from "@mui/material";
 
 const PageVerifyEmail = () => {
   const [userEmail, setUserEmail] = useState("");
@@ -68,34 +71,49 @@ const PageVerifyEmail = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center text-center px-4">
-      <h1 className="text-2xl font-bold mb-4">
+    <div className="min-h-screen flex flex-col items-center justify-center gap-4 text-center px-4 max-w-md">
+      <Typography className="text-3xl font-semibold">
         Verifica tu correo electrónico
-      </h1>
-      <p className="mb-2">
+      </Typography>
+      <p className="">
         Para acceder a <strong>{clientName}</strong>, debes verificar tu correo:
       </p>
-      <p className="mb-6 text-blue-500 font-medium">{userEmail}</p>
+      <p className="text-blue-(--var(--color-primary)) font-medium">{userEmail}</p>
 
       {successMessage && (
-        <p className="text-green-600 mb-2">{successMessage}</p>
+        <p className="text-green-600">{successMessage}</p>
       )}
-      {errorMessage && <p className="text-red-600 mb-2">{errorMessage}</p>}
+      {errorMessage && <p className="text-red-600">{errorMessage}</p>}
 
-      <button
+      {/* <button
         onClick={handleResendVerification}
         disabled={loading}
         className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md mb-4 disabled:opacity-50"
       >
         {loading ? "Enviando..." : "Reenviar correo de verificación"}
-      </button>
+      </button> */}
 
-      <button
+      <Button
+        onClick={handleResendVerification}
+        className="m-0 gap-2 flex items-center bg-[#3d7bff] disabled:text-white"
+        variant="contained"
+        // loadingPosition="end"
+        // loading={isAplying || loading}
+        disabled={loading}
+        // startIcon={<StarsRoundedIcon />}
+      >
+        {/* <StarsRoundedIcon /> */}
+        {loading ? "Enviando" : "Reenviar correo de verificación"}
+        {loading || (loading && <CircularProgress size={16} color="inherit" />)}
+      </Button>
+
+      <Button
         onClick={handleLogout}
-        className="text-sm text-gray-500 underline"
+        variant="contained"
+        className="m-0 text-[#404659] bg-[#DCE2F9] disabled:text-white"
       >
         Iniciar sesión con otra cuenta
-      </button>
+      </Button>
     </div>
   );
 };
