@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 const PageVerifyEmail = () => {
-  const [userEmail, setEmail] = useState("");
+  const [userEmail, setUserEmail] = useState("");
   const [returnTo, setReturnTo] = useState("");
   const [clientId, setClientId] = useState("");
   const [clientName, setClientName] = useState("");
@@ -12,7 +12,7 @@ const PageVerifyEmail = () => {
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    setEmail(params.get("userEmail") || "");
+    setUserEmail(params.get("userEmail") || "");
     setReturnTo(params.get("returnTo") || "");
     setClientId(params.get("clientId") || "");
     setClientName(params.get("clientName") || "");
@@ -51,7 +51,7 @@ const PageVerifyEmail = () => {
 
   const handleLogout = () => {
     const domain = process.env.VITE_AUTH0_DOMAIN;
-    const clientId = process.env.VITE_AUTH0_CLIENT_ID;
+    // const clientId = process.env.VITE_AUTH0_CLIENT_ID;
     const returnToUrl = encodeURIComponent(returnTo || window.location.origin);
 
     window.location.href = `https://${domain}/v2/logout?client_id=${clientId}&returnTo=${returnToUrl}`;
