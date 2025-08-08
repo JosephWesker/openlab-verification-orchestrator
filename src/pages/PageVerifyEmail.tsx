@@ -1,7 +1,9 @@
-import Button from "@mui/material/Button";
+// import Button from "@mui/material/Button";
 import { useEffect, useState } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
-import { Typography } from "@mui/material";
+// import Box from "@mui/material/Box";
+// import Typography from "@mui/material/Typography";
+// import { Box, Typography } from "@mui/material";
 
 const PageVerifyEmail = () => {
   const [userEmail, setUserEmail] = useState("");
@@ -17,10 +19,10 @@ const PageVerifyEmail = () => {
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    setUserEmail(params.get("userEmail") || "");
+    setUserEmail(params.get("userEmail") || "undefined");
     setReturnTo(params.get("returnTo") || "");
     setClientId(params.get("clientId") || "");
-    setClientName(params.get("clientName") || "");
+    setClientName(params.get("clientName") || "undefined");
     setState(params.get("state") || "");
   }, []);
 
@@ -55,7 +57,7 @@ const PageVerifyEmail = () => {
       if (err instanceof Error) {
         console.log("err.message", err.message);
       }
-      setErrorMessage("No se pudo reenviar el correo. Intenta más tarde.");
+      setErrorMessage("No fue posible reenviar el correo. Intenta más tarde.");
     } finally {
       setLoading(false);
     }
@@ -71,19 +73,20 @@ const PageVerifyEmail = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center gap-4 text-center px-4 max-w-md">
-      <Typography className="text-3xl font-semibold">
-        Verifica tu correo electrónico
-      </Typography>
-      <p className="">
-        Para acceder a <strong>{clientName}</strong>, debes verificar tu correo:
-      </p>
-      <p className="text-blue-(--var(--color-primary)) font-medium">{userEmail}</p>
+    <div className="min-h-screen flex flex-col items-center justify-center gap-4 text-center px-4 w-full">
+      <div className="flex flex-col gap-4">
+        <p className="text-3xl font-semibold text-[var(--color-primary)]">
+          Verifica tu correo
+        </p>
+        <p className="font-light">
+          Para acceder a {clientName} verifica el enlace que te hemos enviado a:
+          <div className="font-semibold font-medium">{userEmail}</div>
+        </p>
+        {/* <p className="font-semibold font-medium">{userEmail}</p> */}
+      </div>
 
-      {successMessage && (
-        <p className="text-green-600">{successMessage}</p>
-      )}
-      {errorMessage && <p className="text-red-600">{errorMessage}</p>}
+      {successMessage && <p className="text-green-600">{successMessage}</p>}
+      {errorMessage && <p className="text-orange-600">{errorMessage}</p>}
 
       {/* <button
         onClick={handleResendVerification}
@@ -93,10 +96,10 @@ const PageVerifyEmail = () => {
         {loading ? "Enviando..." : "Reenviar correo de verificación"}
       </button> */}
 
-      <Button
+      <button
         onClick={handleResendVerification}
-        className="m-0 gap-2 flex items-center bg-[#3d7bff] disabled:text-white"
-        variant="contained"
+        className="m-0 gap-2 flex items-center bg-[var(--color-primary)] text-white cursor-pointer px-4 py-2 rounded-md transition duration-200 ease-in-out hover:bg-[var(--color-secondary)] disabled:text-white"
+        // variant="contained"
         // loadingPosition="end"
         // loading={isAplying || loading}
         disabled={loading}
@@ -105,15 +108,15 @@ const PageVerifyEmail = () => {
         {/* <StarsRoundedIcon /> */}
         {loading ? "Enviando" : "Reenviar correo de verificación"}
         {loading || (loading && <CircularProgress size={16} color="inherit" />)}
-      </Button>
+      </button>
 
-      <Button
+      <button
         onClick={handleLogout}
-        variant="contained"
-        className="m-0 text-[#404659] bg-[#DCE2F9] disabled:text-white"
+        // variant="contained"
+        className="m-0 text-[#404659] font-light text-sm cursor-pointer px-4 py-2 rounded-md transition duration-200 ease-in-out hover:text-[var(--color-secondary)] disabled:text-white"
       >
         Iniciar sesión con otra cuenta
-      </Button>
+      </button>
     </div>
   );
 };
