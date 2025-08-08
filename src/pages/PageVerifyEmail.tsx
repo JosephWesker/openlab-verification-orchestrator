@@ -106,7 +106,7 @@ const PageVerifyEmail = () => {
         // startIcon={<StarsRoundedIcon />}
       >
         {/* <StarsRoundedIcon /> */}
-        {loading ? "Enviando" : "Reenviar correo de verificación"}
+        {loading ? "Enviando..." : "Reenviar correo de verificación"}
         {loading || (loading && <CircularProgress size={16} color="inherit" />)}
       </button>
 
