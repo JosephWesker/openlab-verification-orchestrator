@@ -50,29 +50,29 @@ const PageVerificationSuccess = () => {
     //     return;
     //   }
 
-      if (!clientId) return
+    if (!clientId) return;
 
-      fetch(`${VITE_BACKEND_URL}/api/validate-return`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        // body: JSON.stringify({ returnTo: returnToUrl, clientId }),
-        body: JSON.stringify({ clientId }),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.valid) {
-            setReturnToUrlVerified(data.safeUrl);
-          } else {
-            console.error("ReturnTo no válido");
-          }
-        });
+    fetch(`${VITE_BACKEND_URL}/api/validate-return`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      // body: JSON.stringify({ returnTo: returnToUrl, clientId }),
+      body: JSON.stringify({ clientId }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.valid) {
+          setReturnToUrlVerified(data.safeUrl);
+        } else {
+          console.error("ReturnTo no válido");
+        }
+      });
     // }
-  // }, [searchParams, returnToUrl]);
+    // }, [searchParams, returnToUrl]);
   }, [searchParams]);
 
-  const handleRedirect = () => {
-    window.location.href = returnToUrlVerified;
-  };
+  // const handleRedirect = () => {
+  //   window.location.href = returnToUrlVerified;
+  // };
 
   // useEffect(() => {
   //   const returnTo = searchParams.get("returnTo");
@@ -94,19 +94,25 @@ const PageVerificationSuccess = () => {
         <h1 className="text-3xl font-semibold text-[var(--color-primary)]">
           ¡Verificación exitosa!
         </h1>
-        <p>reurnTo: {returnToUrlVerified}</p>
+        {/* <p>reurnTo: {returnToUrlVerified}</p> */}
 
         {returnToUrlVerified !== "" ? (
           <div>
             <p className="">Serás redirigido a la aplicación en un momento.</p>
             <p className="text-sm text-gray-500">
               Si no eres redirigido, haz clic aquí:
-              <button
+              {/* <button
                 onClick={handleRedirect}
                 className="m-0 text-[#404659] font-light text-sm cursor-pointer px-4 py-2 rounded-md transition duration-200 ease-in-out hover:text-[var(--color-secondary)] disabled:text-white"
               >
                 Ir a la aplicación
-              </button>
+              </button> */}
+              <a
+                href={returnToUrlVerified}
+                className="m-0 text-[#404659] font-light text-sm cursor-pointer px-4 py-2 rounded-md transition duration-200 ease-in-out hover:text-[var(--color-secondary)] disabled:text-white"
+              >
+                Abrir app
+              </a>
             </p>
           </div>
         ) : (

@@ -31,10 +31,10 @@ const PageVerifyEmail = () => {
     setErrorMessage("");
     setSuccessMessage("");
 
-    console.log('returnTo', returnTo)
-    console.log('setUserEmail', userEmail)
-    console.log('clientId', clientId)
-    console.log('clientName', clientName)
+    // console.log('returnTo', returnTo)
+    // console.log('setUserEmail', userEmail)
+    // console.log('clientId', clientId)
+    // console.log('clientName', clientName)
 
     try {
       // Llama a tu backend que tiene acceso al Management API
@@ -72,9 +72,12 @@ const PageVerifyEmail = () => {
     // const domain = VITE_AUTH0_DOMAIN;
     // const clientId = process.env.VITE_AUTH0_CLIENT_ID;
     const returnToUrl = encodeURIComponent(returnTo || window.location.origin);
+    console.log(returnToUrl);
 
-    console.log();
-    window.location.href = `https://${VITE_AUTH0_DOMAIN}/v2/logout?client_id=${clientId}&returnTo=${returnToUrl}`;
+    // window.location.href = `https://${VITE_AUTH0_DOMAIN}/v2/logout?client_id=${clientId}&returnTo=${returnToUrl}`;
+    // window.location.href = `https://${VITE_AUTH0_DOMAIN}/v2/logout?client_id=${clientId}`;
+    // window.location.href = `https://${VITE_AUTH0_DOMAIN}/v2/logout?federated`;
+    window.location.href = `https://${VITE_AUTH0_DOMAIN}/v2/logout?federated&client_id=${clientId}`;
   };
 
   return (
@@ -120,8 +123,8 @@ const PageVerifyEmail = () => {
         // variant="contained"
         className="m-0 text-[#404659] font-light text-sm cursor-pointer px-4 py-2 rounded-md transition duration-200 ease-in-out hover:text-[var(--color-secondary)] disabled:text-white"
       >
-        Iniciar sesión con otra cuenta 
-        {`https://${VITE_AUTH0_DOMAIN}/v2/logout?client_id=${clientId}&returnTo=${encodeURIComponent(returnTo || window.location.origin)}`}
+        Iniciar sesión con otra cuenta
+        {/* {`https://${VITE_AUTH0_DOMAIN}/v2/logout?client_id=${clientId}&returnTo=${encodeURIComponent(returnTo || window.location.origin)}`} */}
       </button>
     </div>
   );
