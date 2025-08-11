@@ -10,6 +10,7 @@ const PageVerificationSuccess = () => {
 
   // Este useEffect redirige automáticamente cuando returnToUrl cambia a no vacío
   useEffect(() => {
+    console.log('returnToUrl', returnToUrl)
     if (returnToUrl !== "") {
       // Opcional: esperar 2 segundos antes de redirigir para mostrar mensaje o animación
       const timer = setTimeout(() => {
@@ -64,8 +65,8 @@ const PageVerificationSuccess = () => {
         />
         <h1 className="text-3xl font-semibold text-[var(--color-primary)]">
           ¡Verificación exitosa!
-           {returnToUrl}
         </h1>
+        <p>reurnTo: {returnToUrl}</p>
 
         {returnToUrl !== "" ? (
           <div>
