@@ -115,7 +115,8 @@ const PageVerifyEmail = () => {
         // variant="contained"
         className="m-0 text-[#404659] font-light text-sm cursor-pointer px-4 py-2 rounded-md transition duration-200 ease-in-out hover:text-[var(--color-secondary)] disabled:text-white"
       >
-        Iniciar sesión con otra cuenta
+        Iniciar sesión con otra cuenta 
+        {`https://${VITE_AUTH0_DOMAIN}/v2/logout?client_id=${clientId}&returnTo=${encodeURIComponent(returnTo || window.location.origin)}`}
       </button>
     </div>
   );
