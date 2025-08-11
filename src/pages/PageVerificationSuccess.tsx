@@ -7,20 +7,21 @@ const PageVerificationSuccess = () => {
   const [searchParams] = useSearchParams();
   // const [redirectOnVerify, setRedirectOnVerify] = useState("");
   const [returnToUrl, setReturnToUrl] = useState("");
+  const [returnToUrlVerified, setReturnToUrlVerified] = useState("");
 
   // Este useEffect redirige automáticamente cuando returnToUrl cambia a no vacío
   useEffect(() => {
-    console.log("returnToUrl", returnToUrl);
-    if (returnToUrl !== "") {
+    // console.log("returnToUrl", returnToUrl);
+    if (returnToUrlVerified !== "") {
       // Opcional: esperar 2 segundos antes de redirigir para mostrar mensaje o animación
       const timer = setTimeout(() => {
-        // window.location.href = returnToUrl;
+        // window.location.href = returnToUrlVerified;
       }, 3000);
 
       // Cleanup si el componente se desmonta antes del timeout
       return () => clearTimeout(timer);
     }
-  }, [returnToUrl]);
+  }, [returnToUrlVerified]);
 
   useEffect(() => {
     const returnTo = searchParams.get("returnTo");
@@ -52,12 +53,12 @@ const PageVerificationSuccess = () => {
       fetch(`${VITE_BACKEND_URL}/api/validate-return`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ returnTo, clientId }),
+        body: JSON.stringify({ returnTo: returnToUrl, clientId }),
       })
         .then((res) => res.json())
         .then((data) => {
           if (data.valid) {
-            setReturnToUrl(data.safeUrl);
+            setReturnToUrlVerified(data.safeUrl);
           } else {
             console.error("ReturnTo no válido");
           }
@@ -66,7 +67,7 @@ const PageVerificationSuccess = () => {
   }, [searchParams]);
 
   const handleRedirect = () => {
-    window.location.href = returnToUrl;
+    window.location.href = returnToUrlVerified;
   };
 
   // useEffect(() => {
@@ -89,9 +90,9 @@ const PageVerificationSuccess = () => {
         <h1 className="text-3xl font-semibold text-[var(--color-primary)]">
           ¡Verificación exitosa!
         </h1>
-        <p>reurnTo: {returnToUrl}</p>
+        <p>reurnTo: {returnToUrlVerified}</p>
 
-        {returnToUrl !== "" ? (
+        {returnToUrlVerified !== "" ? (
           <div>
             <p className="">Serás redirigido a la aplicación en un momento.</p>
             <p className="text-sm text-gray-500">
