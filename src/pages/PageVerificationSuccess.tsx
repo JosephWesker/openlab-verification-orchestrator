@@ -13,7 +13,7 @@ const PageVerificationSuccess = () => {
     if (returnToUrl !== "") {
       // Opcional: esperar 2 segundos antes de redirigir para mostrar mensaje o animación
       const timer = setTimeout(() => {
-        window.location.href = returnToUrl;
+        // window.location.href = returnToUrl;
       }, 3000);
 
       // Cleanup si el componente se desmonta antes del timeout
@@ -75,7 +75,7 @@ const PageVerificationSuccess = () => {
                 onClick={handleRedirect}
                 className="m-0 text-[#404659] font-light text-sm cursor-pointer px-4 py-2 rounded-md transition duration-200 ease-in-out hover:text-[var(--color-secondary)] disabled:text-white"
               >
-                Ir a la aplicación
+                Ir a la aplicación {returnToUrl}
               </button>
             </p>
           </div>
