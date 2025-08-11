@@ -44,7 +44,7 @@ const PageVerificationSuccess = () => {
           setReturnToUrl(decodedredirectOnVerify.redirect_on_verify);
         }
       } else if (returnTo) {
-        console.log(returnTo, returnTo);
+        console.log('returnTo', returnTo);
         setReturnToUrl(returnTo);
       } else {
         return;
@@ -64,7 +64,7 @@ const PageVerificationSuccess = () => {
           }
         });
     }
-  }, [searchParams]);
+  }, [searchParams, returnToUrl]);
 
   const handleRedirect = () => {
     window.location.href = returnToUrlVerified;
