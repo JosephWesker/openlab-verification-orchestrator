@@ -15,7 +15,7 @@ const PageVerificationSuccess = () => {
     if (returnToUrlVerified !== "") {
       // Opcional: esperar 2 segundos antes de redirigir para mostrar mensaje o animación
       const timer = setTimeout(() => {
-        // window.location.href = returnToUrlVerified;
+        window.location.href = returnToUrlVerified;
       }, 3000);
 
       // Cleanup si el componente se desmonta antes del timeout
