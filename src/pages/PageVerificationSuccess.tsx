@@ -5,12 +5,12 @@ import arrowAnimation from "@/animations/completed-successfully.json";
 
 const PageVerificationSuccess = () => {
   const [searchParams] = useSearchParams();
-  // const [returnToUrl, setReturnToUrl] = useState("#");
+  // const [redirectOnVerify, setRedirectOnVerify] = useState("");
   const [returnToUrl, setReturnToUrl] = useState("");
 
   // Este useEffect redirige automáticamente cuando returnToUrl cambia a no vacío
   useEffect(() => {
-    console.log('returnToUrl', returnToUrl)
+    console.log("returnToUrl", returnToUrl);
     if (returnToUrl !== "") {
       // Opcional: esperar 2 segundos antes de redirigir para mostrar mensaje o animación
       const timer = setTimeout(() => {
@@ -22,38 +22,54 @@ const PageVerificationSuccess = () => {
     }
   }, [returnToUrl]);
 
-  const handleRedirect = () => {
-    // const domain = VITE_AUTH0_DOMAIN;
-    // const clientId = process.env.VITE_AUTH0_CLIENT_ID;
-    // const returnToUrl = encodeURIComponent(returnTo || window.location.origin);
+  useEffect(() => {
+    const returnTo = searchParams.get("returnTo");
+    const clientId = searchParams.get("clientId");
+    const applicationMetadata = searchParams.get("applicationMetadata");
+    const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
-    // console.log();
+    if ((returnTo || applicationMetadata) && clientId) {
+      if (applicationMetadata) {
+        const decodedredirectOnVerify = JSON.parse(
+          atob(decodeURIComponent(applicationMetadata))
+        )
+        if (decodedredirectOnVerify.redirect_on_verify) {
+          setReturnToUrl(decodedredirectOnVerify.redirect_on_verify);
+        }
+      } else if (returnTo) {
+        setReturnToUrl(returnTo)
+      } else {
+        return
+      }
+
+      fetch(`${VITE_BACKEND_URL}/api/validate-return`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ returnTo, clientId }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.valid) {
+            setReturnToUrl(data.safeUrl);
+          } else {
+            console.error("ReturnTo no válido");
+          }
+        });
+    }
+  }, [searchParams]);
+
+  const handleRedirect = () => {
     window.location.href = returnToUrl;
   };
 
-  useEffect(() => {
-    const returnTo = searchParams.get("returnTo");
+  // useEffect(() => {
+  //   const returnTo = searchParams.get("returnTo");
+  //   const clientId = searchParams.get("clientId");
 
-    if (returnTo) {
-      setReturnToUrl(returnTo);
-    }
-
-    // 1. Obtiene el parámetro 'state' de la URL
-    // const state = searchParams.get("state");
-
-    // if (state) {
-    //   try {
-    //     // 2. Si existe, decodifica el 'state' para obtener el objeto original
-    //     const decodedState = JSON.parse(atob(decodeURIComponent(state)));
-    //     if (decodedState.returnTo) {
-    //       // setReturnToUrl(decodedState.returnTo);
-    //       setReturnToUrl(decodedState.returnTo);
-    //     }
-    //   } catch (e) {
-    //     console.error("Error al decodificar el estado de la URL", e);
-    //   }
-    // }
-  }, [searchParams]);
+  //   if (returnTo) {
+  //     setReturnToUrl(returnTo);
+  //   }
+  // }, [searchParams]);
 
   return (
     <div className="min-h-screen flex items-center justify-center text-center">
