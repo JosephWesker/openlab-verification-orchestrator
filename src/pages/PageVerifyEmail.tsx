@@ -7,7 +7,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 
 const PageVerifyEmail = () => {
   const [userEmail, setUserEmail] = useState("");
-  const [returnTo, setReturnTo] = useState("");
+  // const [returnTo, setReturnTo] = useState("");
   const [clientId, setClientId] = useState("");
   const [clientName, setClientName] = useState("");
   // const [state, setState] = useState("");
@@ -15,12 +15,12 @@ const PageVerifyEmail = () => {
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
-  const VITE_AUTH0_DOMAIN = import.meta.env.VITE_AUTH0_DOMAIN;
+  // const VITE_AUTH0_DOMAIN = import.meta.env.VITE_AUTH0_DOMAIN;
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     setUserEmail(params.get("userEmail") || "undefined");
-    setReturnTo(params.get("returnTo") || "");
+    // setReturnTo(params.get("returnTo") || "");
     setClientId(params.get("clientId") || "");
     setClientName(params.get("clientName") || "undefined");
     // setState(params.get("state") || "");
@@ -68,17 +68,17 @@ const PageVerifyEmail = () => {
     }
   };
 
-  const handleLogout = () => {
-    // const domain = VITE_AUTH0_DOMAIN;
-    // const clientId = process.env.VITE_AUTH0_CLIENT_ID;
-    const returnToUrl = encodeURIComponent(returnTo || window.location.origin);
-    console.log(returnToUrl);
+  // const handleLogout = () => {
+  //   // const domain = VITE_AUTH0_DOMAIN;
+  //   // const clientId = process.env.VITE_AUTH0_CLIENT_ID;
+  //   const returnToUrl = encodeURIComponent(returnTo || window.location.origin);
+  //   console.log(returnToUrl);
 
-    // window.location.href = `https://${VITE_AUTH0_DOMAIN}/v2/logout?client_id=${clientId}&returnTo=${returnToUrl}`;
-    // window.location.href = `https://${VITE_AUTH0_DOMAIN}/v2/logout?client_id=${clientId}`;
-    // window.location.href = `https://${VITE_AUTH0_DOMAIN}/v2/logout?federated`;
-    window.location.href = `https://${VITE_AUTH0_DOMAIN}/v2/logout?federated&client_id=${clientId}`;
-  };
+  //   // window.location.href = `https://${VITE_AUTH0_DOMAIN}/v2/logout?client_id=${clientId}&returnTo=${returnToUrl}`;
+  //   // window.location.href = `https://${VITE_AUTH0_DOMAIN}/v2/logout?client_id=${clientId}`;
+  //   // window.location.href = `https://${VITE_AUTH0_DOMAIN}/v2/logout?federated`;
+  //   window.location.href = `https://${VITE_AUTH0_DOMAIN}/v2/logout?federated&client_id=${clientId}`;
+  // };
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center gap-4 text-center px-4 w-full">
@@ -118,14 +118,14 @@ const PageVerifyEmail = () => {
         {loading || (loading && <CircularProgress size={16} color="inherit" />)}
       </button>
 
-      <button
+      {/* <button
         onClick={handleLogout}
         // variant="contained"
         className="m-0 text-[#404659] font-light text-sm cursor-pointer px-4 py-2 rounded-md transition duration-200 ease-in-out hover:text-[var(--color-secondary)] disabled:text-white"
       >
         Iniciar sesión con otra cuenta
-        {/* {`https://${VITE_AUTH0_DOMAIN}/v2/logout?client_id=${clientId}&returnTo=${encodeURIComponent(returnTo || window.location.origin)}`} */}
-      </button>
+      </button> */}
+      {/* {`https://${VITE_AUTH0_DOMAIN}/v2/logout?client_id=${clientId}&returnTo=${encodeURIComponent(returnTo || window.location.origin)}`} */}
     </div>
   );
 };
