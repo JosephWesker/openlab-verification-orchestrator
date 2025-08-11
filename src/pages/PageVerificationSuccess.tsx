@@ -56,6 +56,7 @@ const PageVerificationSuccess = () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         // body: JSON.stringify({ returnTo: returnToUrl, clientId }),
+        body: JSON.stringify({ clientId }),
       })
         .then((res) => res.json())
         .then((data) => {
