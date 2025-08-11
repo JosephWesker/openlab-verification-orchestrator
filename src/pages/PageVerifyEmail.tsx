@@ -10,7 +10,7 @@ const PageVerifyEmail = () => {
   const [returnTo, setReturnTo] = useState("");
   const [clientId, setClientId] = useState("");
   const [clientName, setClientName] = useState("");
-  const [state, setState] = useState("");
+  // const [state, setState] = useState("");
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -23,13 +23,18 @@ const PageVerifyEmail = () => {
     setReturnTo(params.get("returnTo") || "");
     setClientId(params.get("clientId") || "");
     setClientName(params.get("clientName") || "undefined");
-    setState(params.get("state") || "");
+    // setState(params.get("state") || "");
   }, []);
 
   const handleResendVerification = async () => {
     setLoading(true);
     setErrorMessage("");
     setSuccessMessage("");
+
+    console.log('returnTo', returnTo)
+    console.log('setUserEmail', setUserEmail)
+    console.log('clientId', clientId)
+    console.log('clientName', clientName)
 
     try {
       // Llama a tu backend que tiene acceso al Management API
@@ -45,7 +50,7 @@ const PageVerifyEmail = () => {
             userEmail,
             clientId,
             // returnTo,
-            state,
+            // state,
           }),
         }
       );

@@ -30,16 +30,23 @@ const PageVerificationSuccess = () => {
 
     if ((returnTo || applicationMetadata) && clientId) {
       if (applicationMetadata) {
+        console.log("applicationMetadata", applicationMetadata);
         const decodedredirectOnVerify = JSON.parse(
           atob(decodeURIComponent(applicationMetadata))
-        )
+        );
         if (decodedredirectOnVerify.redirect_on_verify) {
+          console.log(
+            "redirect_on_verify",
+            decodedredirectOnVerify.redirect_on_verify
+          );
+
           setReturnToUrl(decodedredirectOnVerify.redirect_on_verify);
         }
       } else if (returnTo) {
-        setReturnToUrl(returnTo)
+        console.log(returnTo, returnTo);
+        setReturnToUrl(returnTo);
       } else {
-        return
+        return;
       }
 
       fetch(`${VITE_BACKEND_URL}/api/validate-return`, {
