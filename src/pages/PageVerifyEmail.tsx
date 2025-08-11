@@ -32,7 +32,7 @@ const PageVerifyEmail = () => {
     setSuccessMessage("");
 
     console.log('returnTo', returnTo)
-    console.log('setUserEmail', setUserEmail)
+    console.log('setUserEmail', userEmail)
     console.log('clientId', clientId)
     console.log('clientName', clientName)
 

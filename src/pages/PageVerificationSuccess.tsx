@@ -6,7 +6,7 @@ import arrowAnimation from "@/animations/completed-successfully.json";
 const PageVerificationSuccess = () => {
   const [searchParams] = useSearchParams();
   // const [redirectOnVerify, setRedirectOnVerify] = useState("");
-  const [returnToUrl, setReturnToUrl] = useState("");
+  // const [returnToUrl, setReturnToUrl] = useState("");
   const [returnToUrlVerified, setReturnToUrlVerified] = useState("");
 
   // Este useEffect redirige automáticamente cuando returnToUrl cambia a no vacío
@@ -24,36 +24,38 @@ const PageVerificationSuccess = () => {
   }, [returnToUrlVerified]);
 
   useEffect(() => {
-    const returnTo = searchParams.get("returnTo");
+    // const returnTo = searchParams.get("returnTo");
     const clientId = searchParams.get("clientId");
-    const applicationMetadata = searchParams.get("applicationMetadata");
+    // const applicationMetadata = searchParams.get("applicationMetadata");
     const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
-    if ((returnTo || applicationMetadata) && clientId) {
-      if (applicationMetadata) {
-        console.log("applicationMetadata", applicationMetadata);
-        const decodedredirectOnVerify = JSON.parse(
-          atob(decodeURIComponent(applicationMetadata))
-        );
-        if (decodedredirectOnVerify.redirect_on_verify) {
-          console.log(
-            "redirect_on_verify",
-            decodedredirectOnVerify.redirect_on_verify
-          );
+    // if ((returnTo || applicationMetadata) && clientId) {
+    //   if (applicationMetadata) {
+    //     console.log("applicationMetadata", applicationMetadata);
+    //     const decodedredirectOnVerify = JSON.parse(
+    //       atob(decodeURIComponent(applicationMetadata))
+    //     );
+    //     if (decodedredirectOnVerify.redirect_on_verify) {
+    //       console.log(
+    //         "redirect_on_verify",
+    //         decodedredirectOnVerify.redirect_on_verify
+    //       );
 
-          setReturnToUrl(decodedredirectOnVerify.redirect_on_verify);
-        }
-      } else if (returnTo) {
-        console.log('returnTo', returnTo);
-        setReturnToUrl(returnTo);
-      } else {
-        return;
-      }
+    //       setReturnToUrl(decodedredirectOnVerify.redirect_on_verify);
+    //     }
+    //   } else if (returnTo) {
+    //     console.log('returnTo', returnTo);
+    //     setReturnToUrl(returnTo);
+    //   } else {
+    //     return;
+    //   }
+
+      if (!clientId) return
 
       fetch(`${VITE_BACKEND_URL}/api/validate-return`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ returnTo: returnToUrl, clientId }),
+        // body: JSON.stringify({ returnTo: returnToUrl, clientId }),
       })
         .then((res) => res.json())
         .then((data) => {
@@ -63,8 +65,9 @@ const PageVerificationSuccess = () => {
             console.error("ReturnTo no válido");
           }
         });
-    }
-  }, [searchParams, returnToUrl]);
+    // }
+  // }, [searchParams, returnToUrl]);
+  }, [searchParams]);
 
   const handleRedirect = () => {
     window.location.href = returnToUrlVerified;
