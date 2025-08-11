@@ -64,6 +64,7 @@ const PageVerificationSuccess = () => {
         />
         <h1 className="text-3xl font-semibold text-[var(--color-primary)]">
           ¡Verificación exitosa!
+           {returnToUrl}
         </h1>
 
         {returnToUrl !== "" ? (
@@ -75,7 +76,7 @@ const PageVerificationSuccess = () => {
                 onClick={handleRedirect}
                 className="m-0 text-[#404659] font-light text-sm cursor-pointer px-4 py-2 rounded-md transition duration-200 ease-in-out hover:text-[var(--color-secondary)] disabled:text-white"
               >
-                Ir a la aplicación {returnToUrl}
+                Ir a la aplicación
               </button>
             </p>
           </div>
