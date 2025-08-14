@@ -26,6 +26,8 @@ const PageVerificationSuccess = () => {
   useEffect(() => {
     // const returnTo = searchParams.get("returnTo");
     const clientId = searchParams.get("clientId");
+    const callbackDomain = searchParams.get("callbackDomain");
+
     // const applicationMetadata = searchParams.get("applicationMetadata");
     const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
@@ -56,7 +58,7 @@ const PageVerificationSuccess = () => {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       // body: JSON.stringify({ returnTo: returnToUrl, clientId }),
-      body: JSON.stringify({ clientId }),
+      body: JSON.stringify({ clientId, callbackDomain }),
     })
       .then((res) => res.json())
       .then((data) => {
